@@ -56,7 +56,7 @@ nav a:hover::after{width:100%}
 
 /* ================= HERO ================= */
 .hero{
-  height:80vh;
+  height:60vh;
   background:url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48") center/cover no-repeat;
   display:flex;
   align-items:center;
@@ -103,37 +103,99 @@ section.active{opacity:1;transform:translateY(0)}
 h2{text-align:center;margin-bottom:40px}
 
 /* SERVICES */
-/* HORIZONTAL SERVICES */
-.services-wrapper {
-  position: relative;
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  align-items: center;
+.services-wrapper{
+  display:flex;
+  justify-content:center;
+  padding:24px 10px;
 }
 
-.services {
-  display: flex;
-  gap: 25px;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  padding: 20px;
+.services{
+  width:100%;
+  max-width:720px;              /* 👈 desktop lo wider */
+  background:linear-gradient(180deg,#0f0f0f,#0b0b0b);
+  border-radius:18px;
+  padding:14px 12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  border:1px solid rgba(0,255,153,.15);
+  position:relative;
+  overflow:hidden;
 }
 
-.card {
-  min-width: 280px;
-  flex: 0 0 auto;
-  background: #1a1a1a;
-  padding: 40px 30px;
-  border-radius: 18px;
-  text-align: center;
-  transition: 0.4s;
+/* glow border */
+.services::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:18px;
+  background:linear-gradient(120deg, transparent, rgba(0,255,153,.35), transparent);
+  opacity:.4;
+  animation:shineBorder 4s linear infinite;
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 25px rgba(0,255,153,.4);
+@keyframes shineBorder{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
 }
+
+.card{
+  position:relative;
+  z-index:1;
+  background:rgba(26,26,26,.9);
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.2px;
+  color:#e5fff4;
+  border:1px solid rgba(0,255,153,.25);
+  backdrop-filter: blur(6px);
+  transition:.2s ease;
+}
+
+.card:hover{
+  transform:translateY(-2px) scale(1.04);
+  background:#00ff99;
+  color:#000;
+  box-shadow:0 0 14px rgba(0,255,153,.6);
+}
+
+/* Tablet */
+@media(max-width:768px){
+  .services{
+    max-width:90%;
+  }
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .services{
+    max-width:92%;   /* mobile lo compact */
+    padding:12px 10px;
+    gap:6px;
+  }
+  .card{
+    padding:7px 12px;
+    font-size:12px;
+  }
+}
+
+/* entry animation */
+.card{
+  opacity:0;
+  transform:scale(.9);
+}
+.card.show{
+  opacity:1;
+  transform:scale(1);
+  transition:.4s ease;
+}
+
+
+
 header {
   height: 60px;
   padding: 0 10px;
@@ -401,11 +463,9 @@ footer.active{opacity:1;transform:translateY(0);}
 <!-- SERVICES -->
 <section id="services">
   <h2>Our Services</h2>
-
-  <div class="services-wrapper">
-    <button class="scroll-btn left" onclick="scrollServices(-1)">&#10094;</button>
-
-    <div class="services" id="servicesContainer">
+      <div class="services-wrapper">
+  <div class="services-box">   <!-- 👈 single container box -->
+    <div class="services">
       <div class="card">Personal Training</div>
       <div class="card">Weight Loss</div>
       <div class="card">Strength Training</div>
@@ -413,8 +473,6 @@ footer.active{opacity:1;transform:translateY(0);}
       <div class="card">Nutrition Guidance</div>
     </div>
 
-    <button class="scroll-btn right" onclick="scrollServices(1)">&#10095;</button>
-  </div>
 
 </section>
 
@@ -487,20 +545,16 @@ footer.active{opacity:1;transform:translateY(0);}
   </p>
 
   <div style="max-width:300px; margin:auto; display:flex; flex-direction:column; gap:15px;">
-    <a href="https://wa.me/8333044598?text=Hi%20Prasad%20Fitness,%20I%20want%20to%20know%20more."
-       target="_blank"
-       style="padding:12px; background:#25D366; color:#fff; border-radius:6px; text-decoration:none; font-weight:bold; display:block;">
-       WhatsApp Us
-    </a>
+    <a href="https://wa.me/918333044598?text=Hi%20Prasad%20Fitness,%20I%20want%20to%20know%20more"
+   target="_blank"
+   rel="noopener"
+   class="card whatsapp">
+   WhatsApp Us
+   
+</a>
 
-    <a href="tel:+8333044598"
-       style="padding:12px; background:#00ff99; color:#000; border-radius:6px; text-decoration:none; font-weight:bold; display:block;">
-       Call Us
-    </a>
   </div>
 </section>
-
-
 
 <!-- MAP -->
 <section id="location" class="map">
@@ -860,6 +914,11 @@ aboutCards.forEach(card=>{
     card.style.boxShadow='0 6px 20px rgba(0,255,153,0.4)';
   });
 });
+</script>
+<script>
+  document.querySelectorAll('.card').forEach((c,i)=>{
+    setTimeout(()=>c.classList.add('show'), i*80);
+  });
 </script>
 
 <script>
