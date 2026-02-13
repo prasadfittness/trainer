@@ -506,8 +506,7 @@ footer.active{opacity:1;transform:translateY(0);}
         <li>Gym Access</li>
         <li>Cardio Area</li>
         <li>Free Locker</li>
-      </ul>
-      <button onclick="openMembership('Basic')" id="plan-Basic">Join Now</button>
+     <button onclick="openMembership('Basic')" class="plan-btn" id="plan-Basic">Join Now</button>
 
     </div>
     <div class="price-card">
@@ -518,7 +517,7 @@ footer.active{opacity:1;transform:translateY(0);}
         <li>Group Classes</li>
         <li>Personal Trainer 1x/Week</li>
       </ul>
-      <button onclick="openMembership('Standard')">Join Now</button>
+      <button onclick="openMembership('Standard')" class="plan-btn">Join Now</button>
 
     </div>
     <div class="price-card">
@@ -529,7 +528,7 @@ footer.active{opacity:1;transform:translateY(0);}
         <li>Unlimited Personal Training</li>
         <li>Nutrition Plan</li>
       </ul>
-      <button onclick="openMembership('Premium')">Join Now</button>
+     <button onclick="openMembership('Premium')" class="plan-btn">Join Now</button>
 
     </div>
   </div>
@@ -548,10 +547,11 @@ footer.active{opacity:1;transform:translateY(0);}
     <a href="https://wa.me/918333044598?text=Hi%20Prasad%20Fitness,%20I%20want%20to%20know%20more"
    target="_blank"
    rel="noopener"
-   class="card whatsapp">
-   WhatsApp Us
-   
+   class="whatsapp-contact-btn">
+   💬 WhatsApp Us
 </a>
+
+
 
   </div>
 </section>
@@ -563,7 +563,38 @@ footer.active{opacity:1;transform:translateY(0);}
 </section>
 
 <!-- CALL & WHATSAPP -->
+ <style>
+/* CONTACT WHATSAPP BUTTON */
+.whatsapp-contact-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 20px;
+  background:#25D366;
+  color:#fff;
+  text-decoration:none;   /* 👈 underline remove */
+  border-radius:40px;
+  font-weight:600;
+  font-size:16px;
+  box-shadow:0 8px 20px rgba(37,211,102,0.4);
+  transition:0.3s ease;
+}
 
+.whatsapp-contact-btn:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 12px 28px rgba(37,211,102,0.6);
+}
+
+/* Mobile polish */
+@media(max-width:480px){
+  .whatsapp-contact-btn{
+    width:100%;
+    font-size:15px;
+    padding:14px 16px;
+  }
+}
+</style>
 <!-- ABOUT SECTION -->
 <!-- ABOUT BUTTON in NAV -->
 
@@ -670,6 +701,16 @@ footer.active{opacity:1;transform:translateY(0);}
     <h3>Registration Successful!</h3>
     <p>Welcome to Prasad Fitness 💪</p>
     <button onclick="closeSuccess()">Continue</button>
+  </div>
+</div>
+
+<!-- ================= ALREADY REGISTERED POPUP ================= -->
+<div id="alreadyPopup" class="success-popup">
+  <div class="success-content">
+    <div class="success-icon">✔️</div>
+    <h3>Already Registered!</h3>
+    <p>You have already joined Prasad Fitness 💪</p>
+    <button onclick="closeAlready()">Okay</button>
   </div>
 </div>
 
@@ -818,7 +859,14 @@ const successPopup = document.getElementById("successPopup");
 /* OPEN FORM */
 joinBtn.addEventListener("click", function(e){
   e.preventDefault();
-  openMembership();   // use same function
+
+  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
+
+  if (isRegistered === "true") {
+    alreadyPopup.style.display = "flex";
+  } else {
+    openMembership();
+  }
 });
 
 
@@ -847,6 +895,7 @@ membershipForm.addEventListener("submit", function(e){
   membershipForm.reset();
   membershipSection.style.display = "none";
   successPopup.style.display = "flex";
+localStorage.setItem("prasadFitnessRegistered", "true");
 
   // 🔥 CHANGE HERO BUTTON TEXT
   joinBtn.textContent = "Welcome to Prasad Fitness 💪";
@@ -855,6 +904,8 @@ membershipForm.addEventListener("submit", function(e){
 
   submitBtn.disabled = false;
   submitBtn.textContent = "Submit";
+  
+
 })
 
   .catch(() => {
@@ -862,6 +913,7 @@ membershipForm.addEventListener("submit", function(e){
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit";
   });
+  
 
 });
 
@@ -933,7 +985,27 @@ function openMembership(planName){
   } else {
     planDropdown.value = "";
   }
+  function openMembership(planName){
+  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
+  if (isRegistered === "true") {
+    alreadyPopup.style.display = "flex";
+    return; // ❌ form open avvakudadhu
+  }
+
+  const membershipSection = document.getElementById("membership-section");
+  const planDropdown = document.getElementById("planSelect");
+
+  membershipSection.style.display = "flex";
+
+  if(planName){
+    planDropdown.value = planName;
+  } else {
+    planDropdown.value = "";
+  }
 }
+
+}
+
 </script>
 <footer>
   © 2026 Prasad Fitness Gym | All Rights Reserved | <span style="font-size:13px; color:#ccc;">Email:prasadfittness@gmail.com</span>
@@ -1028,6 +1100,34 @@ function scrollServices(direction) {
   const scrollAmount = 320; // how much it moves per click
   container.scrollLeft += direction * scrollAmount;
 }
+const alreadyPopup = document.getElementById("alreadyPopup");
+
+function closeAlready(){
+  alreadyPopup.style.display = "none";
+}
+
+// 🔁 CHECK ALREADY REGISTERED ON PAGE LOAD
+window.addEventListener("load", () => {
+  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
+
+  if (isRegistered === "true") {
+    // Hero Join button UI
+    joinBtn.textContent = "Already Registered ✅";
+    joinBtn.style.background = "#22c55e";
+    joinBtn.style.opacity = "0.9";
+    joinBtn.style.pointerEvents = "auto"; // popup kosam click allow
+
+    // 🔒 Disable all pricing plan buttons
+    document.querySelectorAll(".plan-btn").forEach(btn => {
+      btn.textContent = "Already Joined ✔️";
+      btn.disabled = true;
+      btn.style.background = "#22c55e";
+      btn.style.cursor = "not-allowed";
+      btn.style.opacity = "0.8";
+    });
+  }
+});
+
 
 
 
