@@ -423,10 +423,232 @@ footer.active{opacity:1;transform:translateY(0);}
   opacity: 1;
   transform: translateY(0);
 }
+/* Loader overlay */
 
+/* FULL SCREEN LOADER */
+#gym-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+  overflow: hidden;
+  background: #0a0a0a;
+  font-family: 'Arial', sans-serif;
+}
+
+/* PARTICLE CANVAS */
+#gym-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* TEXT CONTAINER */
+.gym-loader-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.gym-loader-text h1 {
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(90deg,#00ff99,#09a2cc,#00ff99);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #00ff99;
+  width: 0ch;
+  animation: blink-cursor 0.7s steps(1) infinite;
+}
+
+.gym-loader-text p {
+  font-size: 36px;
+  color: #fff;
+  margin-top: 15px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+/* CURSOR BLINK */
+@keyframes blink-cursor {
+  0%,100% { border-color: #00ff99; }
+  50% { border-color: transparent; }
+}
+
+/* FADE IN */
+.fade-in { opacity: 1 !important; }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .gym-loader-text h1 { font-size: 36px; }
+  .gym-loader-text p { font-size: 16px; }
+}
+@media(max-width:480px){
+  .gym-loader-text h1 { font-size: 20px; }
+  .gym-loader-text p { font-size: 14px; }
+}
+
+/* Fullscreen loader */
+#gym-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #0c0c0c;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Loader text container */
+.gym-loader-text {
+  text-align: center;
+  color: #00ff99;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Typewriter effect for H1 */
+.gym-loader-text h1 {
+  font-size: 30px;
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(90deg, #00ff99, #09a2cc, #00ff99);
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-right: 3px solid #00ff99;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(28, end) 1s forwards, blink 0.7s step-end infinite;
+}
+
+/* Fade-in for paragraph */
+.gym-loader-text p {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0;
+  margin-top: 15px;
+  animation: fadeIn 2s 5s forwards;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 28ch; } /* adjust 'ch' to number of characters */
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { border-color: #00ff99; }
+  50% { border-color: transparent; }
+}
+
+/* Fade in paragraph */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .gym-loader-text h1 { font-size: 36px; }
+  .gym-loader-text p { font-size: 16px; }
+}
+@media(max-width:480px){
+  .gym-loader-text h1 { font-size: 10px; }
+  .gym-loader-text p { font-size: 14px; }
+}
+/* PARTICLE BACKGROUND */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particles span {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #00ff99;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particleMove 4s linear infinite;
+}
+
+.particles span:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+.particles span:nth-child(2) { top: 20%; left: 25%; animation-delay: 0.5s; }
+.particles span:nth-child(3) { top: 30%; left: 50%; animation-delay: 1s; }
+.particles span:nth-child(4) { top: 40%; left: 70%; animation-delay: 1.5s; }
+.particles span:nth-child(5) { top: 50%; left: 90%; animation-delay: 2s; }
+.particles span:nth-child(6) { top: 60%; left: 15%; animation-delay: 2.5s; }
+.particles span:nth-child(7) { top: 70%; left: 35%; animation-delay: 3s; }
+.particles span:nth-child(8) { top: 80%; left: 55%; animation-delay: 3.5s; }
+.particles span:nth-child(9) { top: 90%; left: 75%; animation-delay: 4s; }
+.particles span:nth-child(10){ top: 95%; left: 95%; animation-delay: 4.5s; }
+
+@keyframes particleMove {
+  0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50% { transform: translateY(-30px) translateX(20px); opacity: 1; }
+  100% { transform: translateY(-60px) translateX(-20px); opacity: 0; }
+}
+
+/* AUTO HIDE LOADER AFTER 5 SECONDS */
+#gym-loader {
+  animation: hideLoader 0s ease 7s forwards; /* hides after 5s */
+}
+
+@keyframes hideLoader {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+/* Responsive font sizes */
+@media(max-width:768px){
+  .gym-loader-text h1 { font-size: 36px; line-height: 1.2; }
+  .gym-loader-text p { font-size: 16px; }
+}
+@media(max-width:480px){
+  .gym-loader-text h1 { font-size: 28px; line-height: 1.2; }
+  .gym-loader-text p { font-size: 14px; }
+}
 
 </style>
 </head>
+<!-- CINEMATIC LOADER -->
+<div id="gym-loader">
+  <!-- PARTICLE BACKGROUND -->
+  <div class="particles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  
+  </div>
+
+  <!-- TEXT -->
+  <div class="gym-loader-text">
+    <h1>WELCOME TO 
+      PRASAD FITNESS</h1>
+    <p>Start Your Journey</p>
+  </div>
+</div>
+  
+
+
+
 
 <body>
 
@@ -848,76 +1070,145 @@ footer.active{opacity:1;transform:translateY(0);}
 
 
 <!-- ================= SCRIPT ================= -->
-<script>
 
-const joinBtn = document.getElementById("joinBtn");
-const membershipSection = document.getElementById("membership-section");
+<script>
 const membershipForm = document.getElementById("membershipForm");
 const submitBtn = document.getElementById("submitBtn");
 const successPopup = document.getElementById("successPopup");
-
-/* OPEN FORM */
-joinBtn.addEventListener("click", function(e){
-  e.preventDefault();
-
-  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
-
-  if (isRegistered === "true") {
-    alreadyPopup.style.display = "flex";
-  } else {
-    openMembership();
-  }
-});
-
-
-/* CLOSE FORM */
+const alreadyPopupBox = document.getElementById("alreadyPopup");
 function closeMembership(){
+  document.getElementById("membership-section").style.display = "none";
+  membershipForm.reset();
+  
+}
+
+function closeAlready() {
+  // 1️⃣ Close Already Registered popup
+  const alreadyPopup = document.getElementById("alreadyPopup");
+  alreadyPopup.style.display = "none";
+
+  // 2️⃣ Close Membership Form popup
+  const membershipSection = document.getElementById("membership-section");
   membershipSection.style.display = "none";
+
+  // 3️⃣ Reset form safely
+  const membershipForm = document.getElementById("membershipForm");
+  if (membershipForm) membershipForm.reset();
+
+  // 4️⃣ Redirect / Scroll to Home
+  const homeSection = document.getElementById("home");
+  if (homeSection) {
+    const headerOffset = 60;
+    const elementPosition = homeSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
 }
 
-/* CLOSE SUCCESS */
-function closeSuccess(){
-  successPopup.style.display = "none";
-}
 
-/* FORM SUBMIT */
+
 membershipForm.addEventListener("submit", function(e){
-  e.preventDefault();
+  e.preventDefault(); // 🛑 prevents page reload
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "Submitting...";
+  submitBtn.textContent = "Checking...";
 
-  fetch("https://script.google.com/macros/s/AKfycbzn-aqIcZ82JI11jZVQELl2eWMCxY08w6I0dOJIchmmLiNjrlASRaYsfemhwGDqmh1W/exec", {
-    method:"POST",
-    body:new FormData(membershipForm)
-  })
-  .then(() => {
-  membershipForm.reset();
-  membershipSection.style.display = "none";
-  successPopup.style.display = "flex";
-localStorage.setItem("prasadFitnessRegistered", "true");
+  const mobile = membershipForm.mobile.value;
 
-  // 🔥 CHANGE HERO BUTTON TEXT
+  fetch("https://script.google.com/macros/s/AKfycbzn-aqIcZ82JI11jZVQELl2eWMCxY08w6I0dOJIchmmLiNjrlASRaYsfemhwGDqmh1W/exec?mobile=" + mobile)
+  .then(res => res.text())
+  .then(response => {
+response = response.trim();  // ⭐ FIX
+if(response.startsWith("EXISTS")){
+
+  alreadyPopupBox.style.display = "flex";
+
+  const parts = response.split("|");
+  const userPlan = parts[1]; // user's plan from sheet
+
+  const joinBtn = document.getElementById("joinBtn");
   joinBtn.textContent = "Welcome to Prasad Fitness 💪";
-  joinBtn.style.pointerEvents = "none";   // disable clicking again
-  joinBtn.style.background = "#22c55e";   // change color (green)
+  joinBtn.style.pointerEvents = "none";
+  joinBtn.style.background = "#22c55e";
+
+  document.querySelectorAll(".plan-btn").forEach(btn=>{
+
+    if(btn.closest(".price-card").querySelector("h3").innerText === userPlan){
+
+      btn.textContent = "Your Plan 💪";
+      btn.style.background = "#22c55e";
+      btn.disabled = true;
+
+    } else {
+
+      btn.disabled = true;
+      btn.style.background = "#555";
+      btn.style.cursor = "not-allowed";
+    }
+
+  });
 
   submitBtn.disabled = false;
   submitBtn.textContent = "Submit";
-  
+  return;
+}
 
-})
 
+
+    // SAVE NEW DATA
+    fetch("https://script.google.com/macros/s/AKfycbzn-aqIcZ82JI11jZVQELl2eWMCxY08w6I0dOJIchmmLiNjrlASRaYsfemhwGDqmh1W/exec", {
+      method:"POST",
+      body:new FormData(membershipForm)
+    })
+    .then(() => {
+      membershipForm.reset();
+      document.getElementById("membership-section").style.display = "none";
+      successPopup.style.display = "flex";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+
+      
+    });
+
+  })
   .catch(() => {
-    alert("Error submitting form.");
+    alert("Error occurred");
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit";
   });
-  
-
 });
+function closeSuccess(){
+  document.getElementById("successPopup").style.display = "none";
+}
 
+// 🔹 FUNCTION TO UPDATE HERO BUTTON AND PLAN BUTTONS
+function updateUIAfterRegistration(userPlan){
+  const joinBtn = document.getElementById("joinBtn");
+  const planButtons = document.querySelectorAll(".plan-btn");
 
+  // Hero button
+  joinBtn.textContent = "Welcome to Prasad Fitness 💪";
+  joinBtn.style.pointerEvents = "none";
+  joinBtn.style.background = "#22c55e";
+
+  // Plan buttons
+  planButtons.forEach(btn => {
+    const planName = btn.closest(".price-card").querySelector("h3").innerText;
+    if(planName === userPlan){
+      btn.textContent = "Your Plan 💪";
+      btn.style.background = "#22c55e";
+      btn.disabled = true;
+    } else {
+      btn.disabled = true;
+      btn.style.background = "#555";
+      btn.style.cursor = "not-allowed";
+    }
+  });
+}
 </script>
 
 
@@ -975,22 +1266,6 @@ aboutCards.forEach(card=>{
 
 <script>
 function openMembership(planName){
-  const membershipSection = document.getElementById("membership-section");
-  const planDropdown = document.getElementById("planSelect");
-
-  membershipSection.style.display = "flex";
-
-  if(planName){
-    planDropdown.value = planName;
-  } else {
-    planDropdown.value = "";
-  }
-  function openMembership(planName){
-  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
-  if (isRegistered === "true") {
-    alreadyPopup.style.display = "flex";
-    return; // ❌ form open avvakudadhu
-  }
 
   const membershipSection = document.getElementById("membership-section");
   const planDropdown = document.getElementById("planSelect");
@@ -1003,10 +1278,16 @@ function openMembership(planName){
     planDropdown.value = "";
   }
 }
+// JOIN NOW HERO BUTTON
+const joinBtn = document.getElementById("joinBtn");
 
-}
+joinBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  openMembership();
+});
 
 </script>
+
 <footer>
   © 2026 Prasad Fitness Gym | All Rights Reserved | <span style="font-size:13px; color:#ccc;">Email:prasadfittness@gmail.com</span>
 </footer>
@@ -1086,6 +1367,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.6 });
 
+
 observer.observe(document.getElementById("achievements"));
 
 
@@ -1107,29 +1389,88 @@ function closeAlready(){
 }
 
 // 🔁 CHECK ALREADY REGISTERED ON PAGE LOAD
+
+
+
+
+</script>
+<script>
+
 window.addEventListener("load", () => {
-  const isRegistered = localStorage.getItem("prasadFitnessRegistered");
+  const loader = document.getElementById("gym-loader");
+  const typeText = document.getElementById("gym-type-text");
+  const subText = document.getElementById("gym-sub-text");
+  const message = "Welcome to Prasad Fitness 💪";
+  let index = 0;
 
-  if (isRegistered === "true") {
-    // Hero Join button UI
-    joinBtn.textContent = "Already Registered ✅";
-    joinBtn.style.background = "#22c55e";
-    joinBtn.style.opacity = "0.9";
-    joinBtn.style.pointerEvents = "auto"; // popup kosam click allow
+  // ----- TYPEWRITER EFFECT -----
+  function typeWriter() {
+    if(index < message.length){
+      typeText.textContent += message.charAt(index);
+      index++;
+      setTimeout(typeWriter, 100);
+    } else {
+      setTimeout(() => {
+        typeText.style.opacity = 0;
+        subText.classList.add("fade-in");
+      }, 700);
 
-    // 🔒 Disable all pricing plan buttons
-    document.querySelectorAll(".plan-btn").forEach(btn => {
-      btn.textContent = "Already Joined ✔️";
-      btn.disabled = true;
-      btn.style.background = "#22c55e";
-      btn.style.cursor = "not-allowed";
-      btn.style.opacity = "0.8";
+      setTimeout(() => {
+        loader.style.opacity = 0;
+        loader.style.pointerEvents = "none";
+      }, 2200);
+    }
+  }
+  typeWriter();
+
+  // ----- CINEMATIC PARTICLE BACKGROUND -----
+  const canvas = document.getElementById("gym-canvas");
+  const ctx = canvas.getContext("2d");
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+
+  const particles = [];
+  const particleCount = 80;
+
+  for(let i=0;i<particleCount;i++){
+    particles.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      r: Math.random()*2+1,
+      vx: (Math.random()-0.5)*0.6,
+      vy: (Math.random()-0.5)*0.6
     });
   }
+
+  function animateParticles(){
+    ctx.fillStyle = "rgba(10,10,10,0.2)";
+    ctx.fillRect(0,0,w,h);
+
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = "rgba(0,255,153,0.8)";
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if(p.x<0) p.x=w;
+      if(p.x>w) p.x=0;
+      if(p.y<0) p.y=h;
+      if(p.y>h) p.y=0;
+    });
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
 });
-
-
-
 
 </script>
 
