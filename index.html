@@ -426,10 +426,43 @@ footer.active{opacity:1;transform:translateY(0);}
 
 
 @keyframes blink { 50% { border-color: transparent; } }
+.typing {
+  border-right: 2px solid #00ff99;
+  padding-right: 2px;
+  display: inline-block;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink { 50% { border-color: transparent; } }
+
+#intro-container h1,
+#intro-container h2,
+#intro-container h3,
+#intro-container h4,
+#intro-container h5 {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+
 
 </style>
 </head>
 <body>
+<!-- INTRO TYPING ANIMATION -->
+<div id="intro-container" style="
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111;
+    z-index:2000;
+    opacity:0;
+    transition: opacity 1s ease;
+">
+    <div id="intro"></div>
+</div>
+
 
 <header>
   <div class="logo">
@@ -502,28 +535,28 @@ footer.active{opacity:1;transform:translateY(0);}
   <div class="pricing-grid">
     <div class="price-card">
       <h3>Basic</h3>
-      <p class="price">₹999 / Month</p>
+      <p class="price">₹499 / Month</p>
       <ul>
-        <li>Gym Access</li>
-        <li>Cardio Area</li>
-        <li>Free Locker</li>
+        <li>Gym/Home workouts</li>
+        <li>Doubt session/1xweek</li>
+        <li>live session/1xweek</li>
      <button onclick="openMembership('Basic')" class="plan-btn" id="plan-Basic">Join Now</button>
 
     </div>
     <div class="price-card">
       <h3>Standard</h3>
-      <p class="price">₹1999 / Month</p>
+      <p class="price">₹799 / Month</p>
       <ul>
         <li>All Basic Features</li>
         <li>Group Classes</li>
-        <li>Personal Trainer 1x/Week</li>
+        <li>Personal Trainer 3x/Week</li>
       </ul>
       <button onclick="openMembership('Standard')" class="plan-btn">Join Now</button>
 
     </div>
     <div class="price-card">
       <h3>Premium</h3>
-      <p class="price">₹2999 / Month</p>
+      <p class="price">₹999 / Month</p>
       <ul>
         <li>All Standard Features</li>
         <li>Unlimited Personal Training</li>
@@ -1173,70 +1206,86 @@ function closeAlready(){
 
 
 </script>
-
 <script>
 const texts = [
-  { id: "text1", text: "Welcome" },
-  { id: "text2", text: "to" },
-  { id: "text3", text: "Prasad" },
-  { id: "text4", text: "Fitness" },
-  { id: "text5", text: "Never Compromise" }
+  { text: "WELCOME", tag: "h1", size: "2rem" },
+  { text: "TO", tag: "h2", size: "2rem" },
+  { text: "PRASAD FITTNESS", tag: "h3", size: "1.7rem" },
+  { text: "TRANSFORM YOUR LIFE", tag: "h4", size: "1.5rem" },
+  { text: "JOIN US NOW!", tag: "h5", size: "1.2rem" }
 ];
 
-const typingSpeed = 100;
+const typingSpeed = 200;
+const backspaceSpeed = 50;
 const holdTime = 1200;
 let index = 0;
 
-function typeText(elem, text, callback) {
-  let i = 0;
-  elem.innerHTML = '<span class="typing"></span>';
-  const typingSpan = elem.querySelector('.typing');
+// Smooth fade-in for intro container
+window.addEventListener('DOMContentLoaded', ()=>{
+  const introContainer = document.getElementById("intro-container");
+  introContainer.style.opacity = 1;
+  startIntro();
+});
 
-  const typeInterval = setInterval(() => {
-    typingSpan.textContent += text[i];
+function typeText(elem, text, callback){
+  let i = 0;
+  elem.style.opacity = 1;
+  elem.innerHTML = '<span class="typing"></span>';
+  const span = elem.querySelector('.typing');
+  const interval = setInterval(()=>{
+    span.textContent += text[i];
     i++;
-    if (i === text.length) {
-      clearInterval(typeInterval);
-      setTimeout(() => deleteText(elem, callback), holdTime);
+    if(i === text.length){
+      clearInterval(interval);
+      setTimeout(()=>backspaceText(span, callback), holdTime);
     }
   }, typingSpeed);
 }
 
-function deleteText(elem, callback) {
-  const typingSpan = elem.querySelector('.typing');
-  let text = typingSpan.textContent;
+function backspaceText(span, callback){
+  let text = span.textContent;
   let i = text.length;
-
-  const deleteInterval = setInterval(() => {
-    typingSpan.textContent = text.slice(0, i - 1);
+  const interval = setInterval(()=>{
+    span.textContent = text.slice(0, i-1);
     i--;
-    if (i === 0) {
-      clearInterval(deleteInterval);
+    if(i <= 0){
+      clearInterval(interval);
       callback();
     }
-  }, 50);
+  }, backspaceSpeed);
 }
 
-function startTyping() {
-  if (index < texts.length) {
-    const elem = document.getElementById(texts[index].id);
-    elem.style.opacity = 1;
-    typeText(elem, texts[index].text, () => {
-      elem.style.opacity = 0;
+function startIntro(){
+  if(index < texts.length){
+    const { text, tag, size } = texts[index];
+    const container = document.getElementById("intro");
+    container.innerHTML = `<${tag} style="font-size:${size}; margin:0; color:#00ff99; opacity:0; transform:translateY(10px);"></${tag}>`;
+    const tagElem = container.querySelector(tag);
+    
+    // Animate fade-in from bottom
+    tagElem.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    setTimeout(()=>{
+      tagElem.style.opacity = 1;
+      tagElem.style.transform = 'translateY(0)';
+    }, 50);
+    
+    typeText(tagElem, text, ()=>{
       index++;
-      startTyping();
+      startIntro();
     });
   } else {
-    // Redirect to home page after intro
-    setTimeout(() => {
-      window.location.href = "home.html";
-    }, 500);
+    // Fade out intro smoothly
+    const introContainer = document.getElementById("intro-container");
+    introContainer.style.transition = 'opacity 1.8s ease';
+    introContainer.style.opacity = 0;
+    setTimeout(()=>{ introContainer.style.display = "none"; }, 1500);
+     sessionStorage.setItem("introPlayed", "true");
   }
 }
-
-// Start the intro animation
-startTyping();
 </script>
+
+
+
 </body>
 </html>
 
