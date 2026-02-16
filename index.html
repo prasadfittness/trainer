@@ -423,233 +423,12 @@ footer.active{opacity:1;transform:translateY(0);}
   opacity: 1;
   transform: translateY(0);
 }
-/* Loader overlay */
 
-/* FULL SCREEN LOADER */
-#gym-loader {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 99999;
-  overflow: hidden;
-  background: #0a0a0a;
-  font-family: 'Arial', sans-serif;
-}
 
-/* PARTICLE CANVAS */
-#gym-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-/* TEXT CONTAINER */
-.gym-loader-text {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.gym-loader-text h1 {
-  font-size: 20px;
-  font-weight: 900;
-  background: linear-gradient(90deg,#00ff99,#09a2cc,#00ff99);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid #00ff99;
-  width: 0ch;
-  animation: blink-cursor 0.7s steps(1) infinite;
-}
-
-.gym-loader-text p {
-  font-size: 36px;
-  color: #fff;
-  margin-top: 15px;
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-/* CURSOR BLINK */
-@keyframes blink-cursor {
-  0%,100% { border-color: #00ff99; }
-  50% { border-color: transparent; }
-}
-
-/* FADE IN */
-.fade-in { opacity: 1 !important; }
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .gym-loader-text h1 { font-size: 36px; }
-  .gym-loader-text p { font-size: 16px; }
-}
-@media(max-width:480px){
-  .gym-loader-text h1 { font-size: 20px; }
-  .gym-loader-text p { font-size: 14px; }
-}
-
-/* Fullscreen loader */
-#gym-loader {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: #0c0c0c;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-/* Loader text container */
-.gym-loader-text {
-  text-align: center;
-  color: #00ff99;
-  font-family: 'Arial', sans-serif;
-}
-
-/* Typewriter effect for H1 */
-.gym-loader-text h1 {
-  font-size: 30px;
-  font-weight: 900;
-  color: transparent;
-  background: linear-gradient(90deg, #00ff99, #09a2cc, #00ff99);
-  -webkit-background-clip: text;
-  background-clip: text;
-  border-right: 3px solid #00ff99;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 4s steps(28, end) 1s forwards, blink 0.7s step-end infinite;
-}
-
-/* Fade-in for paragraph */
-.gym-loader-text p {
-  font-size: 20px;
-  color: #fff;
-  opacity: 0;
-  margin-top: 15px;
-  animation: fadeIn 2s 5s forwards;
-}
-
-/* Typing animation */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 28ch; } /* adjust 'ch' to number of characters */
-}
-
-/* Cursor blink */
-@keyframes blink {
-  0%, 100% { border-color: #00ff99; }
-  50% { border-color: transparent; }
-}
-
-/* Fade in paragraph */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .gym-loader-text h1 { font-size: 36px; }
-  .gym-loader-text p { font-size: 16px; }
-}
-@media(max-width:480px){
-  .gym-loader-text h1 { font-size: 10px; }
-  .gym-loader-text p { font-size: 14px; }
-}
-/* PARTICLE BACKGROUND */
-.particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.particles span {
-  position: absolute;
-  display: block;
-  width: 6px;
-  height: 6px;
-  background: #00ff99;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: particleMove 4s linear infinite;
-}
-
-.particles span:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-.particles span:nth-child(2) { top: 20%; left: 25%; animation-delay: 0.5s; }
-.particles span:nth-child(3) { top: 30%; left: 50%; animation-delay: 1s; }
-.particles span:nth-child(4) { top: 40%; left: 70%; animation-delay: 1.5s; }
-.particles span:nth-child(5) { top: 50%; left: 90%; animation-delay: 2s; }
-.particles span:nth-child(6) { top: 60%; left: 15%; animation-delay: 2.5s; }
-.particles span:nth-child(7) { top: 70%; left: 35%; animation-delay: 3s; }
-.particles span:nth-child(8) { top: 80%; left: 55%; animation-delay: 3.5s; }
-.particles span:nth-child(9) { top: 90%; left: 75%; animation-delay: 4s; }
-.particles span:nth-child(10){ top: 95%; left: 95%; animation-delay: 4.5s; }
-
-@keyframes particleMove {
-  0% { transform: translateY(0) translateX(0); opacity: 0.6; }
-  50% { transform: translateY(-30px) translateX(20px); opacity: 1; }
-  100% { transform: translateY(-60px) translateX(-20px); opacity: 0; }
-}
-
-/* AUTO HIDE LOADER AFTER 5 SECONDS */
-#gym-loader {
-  animation: hideLoader 0s ease 7s forwards; /* hides after 5s */
-}
-
-@keyframes hideLoader {
-  to { opacity: 0; visibility: hidden; pointer-events: none; }
-}
-/* Responsive font sizes */
-@media(max-width:768px){
-  .gym-loader-text h1 { font-size: 36px; line-height: 1.2; }
-  .gym-loader-text p { font-size: 16px; }
-}
-@media(max-width:480px){
-  .gym-loader-text h1 { font-size: 28px; line-height: 1.2; }
-  .gym-loader-text p { font-size: 14px; }
-}
+@keyframes blink { 50% { border-color: transparent; } }
 
 </style>
 </head>
-<!-- CINEMATIC LOADER -->
-<div id="gym-loader">
-  <!-- PARTICLE BACKGROUND -->
-  <div class="particles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  
-  </div>
-
-  <!-- TEXT -->
-  <div class="gym-loader-text">
-    <h1>WELCOME TO 
-      PRASAD FITNESS</h1>
-    <p>Start Your Journey</p>
-  </div>
-</div>
-  
-
-
-
-
 <body>
 
 <header>
@@ -1394,86 +1173,70 @@ function closeAlready(){
 
 
 </script>
+
 <script>
+const texts = [
+  { id: "text1", text: "Welcome" },
+  { id: "text2", text: "to" },
+  { id: "text3", text: "Prasad" },
+  { id: "text4", text: "Fitness" },
+  { id: "text5", text: "Never Compromise" }
+];
 
-window.addEventListener("load", () => {
-  const loader = document.getElementById("gym-loader");
-  const typeText = document.getElementById("gym-type-text");
-  const subText = document.getElementById("gym-sub-text");
-  const message = "Welcome to Prasad Fitness 💪";
-  let index = 0;
+const typingSpeed = 100;
+const holdTime = 1200;
+let index = 0;
 
-  // ----- TYPEWRITER EFFECT -----
-  function typeWriter() {
-    if(index < message.length){
-      typeText.textContent += message.charAt(index);
-      index++;
-      setTimeout(typeWriter, 100);
-    } else {
-      setTimeout(() => {
-        typeText.style.opacity = 0;
-        subText.classList.add("fade-in");
-      }, 700);
+function typeText(elem, text, callback) {
+  let i = 0;
+  elem.innerHTML = '<span class="typing"></span>';
+  const typingSpan = elem.querySelector('.typing');
 
-      setTimeout(() => {
-        loader.style.opacity = 0;
-        loader.style.pointerEvents = "none";
-      }, 2200);
+  const typeInterval = setInterval(() => {
+    typingSpan.textContent += text[i];
+    i++;
+    if (i === text.length) {
+      clearInterval(typeInterval);
+      setTimeout(() => deleteText(elem, callback), holdTime);
     }
-  }
-  typeWriter();
+  }, typingSpeed);
+}
 
-  // ----- CINEMATIC PARTICLE BACKGROUND -----
-  const canvas = document.getElementById("gym-canvas");
-  const ctx = canvas.getContext("2d");
-  let w = canvas.width = window.innerWidth;
-  let h = canvas.height = window.innerHeight;
+function deleteText(elem, callback) {
+  const typingSpan = elem.querySelector('.typing');
+  let text = typingSpan.textContent;
+  let i = text.length;
 
-  window.addEventListener('resize', () => {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  });
+  const deleteInterval = setInterval(() => {
+    typingSpan.textContent = text.slice(0, i - 1);
+    i--;
+    if (i === 0) {
+      clearInterval(deleteInterval);
+      callback();
+    }
+  }, 50);
+}
 
-  const particles = [];
-  const particleCount = 80;
-
-  for(let i=0;i<particleCount;i++){
-    particles.push({
-      x: Math.random()*w,
-      y: Math.random()*h,
-      r: Math.random()*2+1,
-      vx: (Math.random()-0.5)*0.6,
-      vy: (Math.random()-0.5)*0.6
+function startTyping() {
+  if (index < texts.length) {
+    const elem = document.getElementById(texts[index].id);
+    elem.style.opacity = 1;
+    typeText(elem, texts[index].text, () => {
+      elem.style.opacity = 0;
+      index++;
+      startTyping();
     });
+  } else {
+    // Redirect to home page after intro
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 500);
   }
+}
 
-  function animateParticles(){
-    ctx.fillStyle = "rgba(10,10,10,0.2)";
-    ctx.fillRect(0,0,w,h);
-
-    particles.forEach(p=>{
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle = "rgba(0,255,153,0.8)";
-      ctx.fill();
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if(p.x<0) p.x=w;
-      if(p.x>w) p.x=0;
-      if(p.y<0) p.y=h;
-      if(p.y>h) p.y=0;
-    });
-
-    requestAnimationFrame(animateParticles);
-  }
-
-  animateParticles();
-});
-
+// Start the intro animation
+startTyping();
 </script>
-
 </body>
 </html>
 
