@@ -426,42 +426,54 @@ footer.active{opacity:1;transform:translateY(0);}
 
 
 @keyframes blink { 50% { border-color: transparent; } }
-.typing {
-  border-right: 2px solid #00ff99;
-  padding-right: 2px;
+
+.email-btn {
   display: inline-block;
-  animation: blink 0.7s steps(1) infinite;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #d4af37, #b8962e);
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-@keyframes blink { 50% { border-color: transparent; } }
-
-#intro-container h1,
-#intro-container h2,
-#intro-container h3,
-#intro-container h4,
-#intro-container h5 {
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.email-btn:hover {
+  background: linear-gradient(135deg, #b8962e, #d4af37);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.footer {
+  background: #000;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
 }
 
+.footer a {
+  color: #ededed;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .footer {
+    font-size: 12px;
+    padding: 15px 5px;
+  }
+}
 
 
 </style>
 </head>
 <body>
-<!-- INTRO TYPING ANIMATION -->
-<div id="intro-container" style="
-    position:fixed;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#111;
-    z-index:2000;
-    opacity:0;
-    transition: opacity 1s ease;
-">
-    <div id="intro"></div>
-</div>
 
 
 <header>
@@ -1099,9 +1111,13 @@ joinBtn.addEventListener("click", function(e){
 });
 
 </script>
-
-<footer>
-  © 2026 Prasad Fitness Gym | All Rights Reserved | <span style="font-size:13px; color:#ccc;">Email:prasadfittness@gmail.com</span>
+<footer class="footer">
+  <div class="footer-content">
+    © 2026 Prasad Fitness Gym | All Rights Reserved |
+  <a href="mailto:prasadfittness9@gmail.com"></a>
+      prasadfittness9@gmail.com
+    </a>
+  </div>
 </footer>
 
 
@@ -1206,83 +1222,7 @@ function closeAlready(){
 
 
 </script>
-<script>
-const texts = [
-  { text: "WELCOME", tag: "h1", size: "2rem" },
-  { text: "TO", tag: "h2", size: "2rem" },
-  { text: "PRASAD FITTNESS", tag: "h3", size: "1.7rem" },
-  { text: "TRANSFORM YOUR LIFE", tag: "h4", size: "1.5rem" },
-  { text: "JOIN US NOW!", tag: "h5", size: "1.2rem" }
-];
 
-const typingSpeed = 200;
-const backspaceSpeed = 50;
-const holdTime = 1200;
-let index = 0;
-
-// Smooth fade-in for intro container
-window.addEventListener('DOMContentLoaded', ()=>{
-  const introContainer = document.getElementById("intro-container");
-  introContainer.style.opacity = 1;
-  startIntro();
-});
-
-function typeText(elem, text, callback){
-  let i = 0;
-  elem.style.opacity = 1;
-  elem.innerHTML = '<span class="typing"></span>';
-  const span = elem.querySelector('.typing');
-  const interval = setInterval(()=>{
-    span.textContent += text[i];
-    i++;
-    if(i === text.length){
-      clearInterval(interval);
-      setTimeout(()=>backspaceText(span, callback), holdTime);
-    }
-  }, typingSpeed);
-}
-
-function backspaceText(span, callback){
-  let text = span.textContent;
-  let i = text.length;
-  const interval = setInterval(()=>{
-    span.textContent = text.slice(0, i-1);
-    i--;
-    if(i <= 0){
-      clearInterval(interval);
-      callback();
-    }
-  }, backspaceSpeed);
-}
-
-function startIntro(){
-  if(index < texts.length){
-    const { text, tag, size } = texts[index];
-    const container = document.getElementById("intro");
-    container.innerHTML = `<${tag} style="font-size:${size}; margin:0; color:#00ff99; opacity:0; transform:translateY(10px);"></${tag}>`;
-    const tagElem = container.querySelector(tag);
-    
-    // Animate fade-in from bottom
-    tagElem.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    setTimeout(()=>{
-      tagElem.style.opacity = 1;
-      tagElem.style.transform = 'translateY(0)';
-    }, 50);
-    
-    typeText(tagElem, text, ()=>{
-      index++;
-      startIntro();
-    });
-  } else {
-    // Fade out intro smoothly
-    const introContainer = document.getElementById("intro-container");
-    introContainer.style.transition = 'opacity 1.8s ease';
-    introContainer.style.opacity = 0;
-    setTimeout(()=>{ introContainer.style.display = "none"; }, 1500);
-     sessionStorage.setItem("introPlayed", "true");
-  }
-}
-</script>
 
 
 
