@@ -640,6 +640,13 @@ footer.active{opacity:1;transform:translateY(0);}
     padding:14px 16px;
   }
 }
+#about-section img:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 70px rgba(0,255,153,0.9);
+}
+#about-section a:hover{
+  transform:scale(1.05);
+}
 </style>
 <!-- ABOUT SECTION -->
 <!-- ABOUT BUTTON in NAV -->
@@ -648,36 +655,52 @@ footer.active{opacity:1;transform:translateY(0);}
 <!-- ABOUT SECTION (Initially Hidden) -->
 <section id="about-section" style="display:none; padding:80px 20px; background:#111; color:#fff; text-align:center; border-top:4px solid #00ff99; border-bottom:4px solid #00ff99;">
   <div style="max-width:900px; margin:auto;">
-    <h2 class="fade-item" style="font-size:36px; color:#00ff99; margin-bottom:40px; border-bottom:3px solid #00ff99; display:inline-block; padding-bottom:8px;">
-      About Prasad Fitness Gym
-    </h2>
-    
-    <p class="fade-item" style="font-size:18px; color:#ccc; line-height:1.8; margin-bottom:50px;">
-      <strong>Train Hard. Stay Strong. Transform Your Life.</strong><br><br>
-      At <strong>Prasad Fitness Gym</strong>, we are committed to helping you achieve your fitness goals with <strong>personalized training, expert guidance, and a supportive environment</strong>. 
-      Whether your goal is <strong>weight loss, muscle gain, or overall wellness</strong>, our certified trainers create tailored programs just for you.
-    </p>
+    <h2 style="color:#00ff99; font-size:36px; margin-bottom:50px;">
+    Meet Your Trainer
+  </h2>
 
-    <!-- FEATURE CARDS -->
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px; margin-bottom:50px;">
-      <div class="fade-item card" style="background:#1a1a1a; padding:25px; border-radius:20px; width:260px; text-align:center; border:2px solid #00ff99; box-shadow:0 6px 20px rgba(0,255,153,0.4); transition:0.3s;">
-        <h3 style="color:#00ff99; margin-bottom:15px;">Certified Trainers</h3>
-        <p style="color:#ccc; font-size:16px;">Experienced trainers to guide you safely and effectively.</p>
-      </div>
-      <div class="fade-item card" style="background:#1a1a1a; padding:25px; border-radius:20px; width:260px; text-align:center; border:2px solid #00ff99; box-shadow:0 6px 20px rgba(0,255,153,0.4); transition:0.3s;">
-        <h3 style="color:#00ff99; margin-bottom:15px;">Personalized Programs</h3>
-        <p style="color:#ccc; font-size:16px;">Custom plans designed for your unique body and goals.</p>
-      </div>
-      <div class="fade-item card" style="background:#1a1a1a; padding:25px; border-radius:20px; width:260px; text-align:center; border:2px solid #00ff99; box-shadow:0 6px 20px rgba(0,255,153,0.4); transition:0.3s;">
-        <h3 style="color:#00ff99; margin-bottom:15px;">Community & Motivation</h3>
-        <p style="color:#ccc; font-size:16px;">Stay motivated with a friendly, supportive fitness community.</p>
-      </div>
+  <div style="max-width:1000px; margin:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:60px;">
+
+    <!-- Trainer Photo -->
+    <div>
+      <img src="images/image.jpg" alt="Prasad Fitness Trainer"
+           style="width:320px; height:320px; object-fit:cover; border-radius:50%; 
+                  border:6px solid #00ff99; 
+                  box-shadow:0 0 50px rgba(0,255,153,0.6);
+                  transition:0.4s;">
     </div>
 
-    <p class="fade-item" style="font-size:18px; color:#ccc; line-height:1.8; border-top:2px solid #00ff99; padding-top:25px;">
-      Join <strong>Prasad Fitness Gym</strong> today and start your journey toward a <strong>stronger, healthier, and more confident you</strong>. 
-      We are here to help you every step of the way — no shortcuts, just real results.
-    </p>
+    <!-- Trainer Info -->
+    <div style="max-width:450px; text-align:left;">
+
+      <h3 style="color:#fff; font-size:32px; margin-bottom:10px;">
+        Prasad
+      </h3>
+
+      <p style="color:#00ff99; font-weight:bold; margin-bottom:20px;">
+        Certified Fitness Trainer | Transformation Coach
+      </p>
+
+      <p style="color:#ccc; line-height:1.8; font-size:16px; margin-bottom:26px;">
+     <strong>With years of experience in personal training and body transformation, I specialize in helping individuals achieve sustainable results through structured workouts, personalized nutrition plans, and disciplined lifestyle strategies. My approach focuses on building strength, enhancing confidence, and promoting long-term wellness tailored to each client’s unique goals.
+Whether your aim is weight loss, muscle gain, or overall health optimization, I provide expert guidance, motivation, and support every step of the way.
+
+Follow my journey on Instagram to stay inspired and learn practical fitness tips.</strong>
+      </p>
+      
+
+      <!-- Instagram Button -->
+      <a href="https://instagram.com/flexwithprasad" target="_blank"
+         style="display:inline-block; padding:12px 28px; 
+                background:#00ff99; color:#000; 
+                border-radius:30px; text-decoration:none; 
+                font-weight:bold; transition:0.3s;">
+        Follow on Instagram
+      </a>
+
+    </div>
+
+  </div>
   </div>
 </section>
 <!-- QUICK LINKS SECTION -->
